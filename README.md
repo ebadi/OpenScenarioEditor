@@ -1,5 +1,7 @@
 ### Open Scenario Editor
-_Open Scenario Editor_ is a simple ASAM open scenario (*.xosc) editor based on [Environment Simulator Minimalistic (esmini)](https://github.com/esmini/esmini])
+_Open Scenario Editor_ is a simple ASAM OpenSCENARIO (*.xosc) editor based on [Environment Simulator Minimalistic (esmini)](https://github.com/esmini/esmini).
+
+ASAM OpenSCENARIO defines a file format for the description of the dynamic content of driving and traffic simulators. The primary use-case of OpenSCENARIO is to describe complex, synchronized maneuvers that involve multiple entities like vehicles, pedestrians and other traffic participants. The description of a maneuver may be based on driver actions (e.g. performing a lane change) or on trajectories (e.g. derived from a recorded driving maneuver). Other content, such as the description of the ego vehicle, driver appearance, pedestrians, traffic and environment conditions, is included in the standard as well. You can also read more about [OpenSCENARIO format on the ASAM website](https://www.asam.net/standards/detail/openscenario/).
 
 #### Build and run
 First clone the repository:
@@ -14,9 +16,9 @@ cd ~/OpenScenarioEditor
 ./run.sh
 ```
 
-![Open Scenario Editor Screen shot](ui/OpenScenarioEditor.png)
+Take a look at our demo video by clicking on the image below:
 
-[![Open Scenario Editor Video](https://img.youtube.com/vi/XvoPWt66IqI/0.jpg)](https://youtu.be/XvoPWt66IqI)
+[![Open Scenario Editor Screen shot](ui/OpenScenarioEditor.png)](https://youtu.be/XvoPWt66Iq)
 
 
 #### Credits
@@ -24,4 +26,3 @@ cd ~/OpenScenarioEditor
 This work is done by [Infotiv AB](https://www.infotiv.se) under [VALU3S](https://valu3s.eu/) project. This project has received funding from the [ECSEL](https://www.ecsel.eu) Joint Undertaking (JU) under grant agreement No 876852. The JU receives support from the European Union’s Horizon 2020 research and innovation programme and Austria, Czech Republic, Germany, Ireland, Italy, Portugal, Spain, Sweden, Turkey.
 
 [Open Scenario Editor](https://github.com/ebadi/OpenScenarioEditor) project is started and currently maintained by Hamid Ebadi.
-

@@ -1,4 +1,4 @@
-"""PyQT5 versie van een op een treeview gebaseerde XML-editor
+"""PyQT5 version of a treeview-based XML-editor
 """
 from PyQt5.QtWidgets import (QWidget, QPushButton,
                              QHBoxLayout, QVBoxLayout, QApplication)
@@ -68,7 +68,7 @@ class ElementDialog(qtw.QDialog):
         self.cmb_ns.addItem('-- none --')
         self.cmb_ns.addItems(self._parent.editor.ns_uris)
 
-        self.cb = qtw.QCheckBox('Bevat data:', self)
+        self.cb = qtw.QCheckBox('Contains data: ', self)
         self.cb.setCheckable(False)
         self.txt_data = qtw.QTextEdit(self)
         self.txt_data.setTabChangesFocus(True)
@@ -158,7 +158,7 @@ class ElementDialog(qtw.QDialog):
         super().accept()
 
     def keyPressEvent(self, event):
-        """reimplemented event handler voor toetsaanslagen"""
+        """reimplemented event handler for keystrokes """
         if event.key() == core.Qt.Key_Escape:
             super().done(qtw.QDialog.Rejected)
 
@@ -264,7 +264,7 @@ class AttributeDialog(qtw.QDialog):
     # super().done(qtw.QDialog.Rejected)
 
     def keyPressEvent(self, event):
-        """event handler voor toetsaanslagen"""
+        """event handler for keystrokes """
         if event.key() == core.Qt.Key_Escape:
             super().done(qtw.QDialog.Rejected)
 
@@ -985,7 +985,7 @@ class Gui(qtw.QMainWindow):
         QMessageBox.information(
             None,
             "Information",
-            "<a href='https://github.com/esmini/esmini'>Environment Simulator Minimalistic (esmini)</a> is a basic OpenSCENARIO player that this tool use internally.")
+            "<a href='https://github.com/esmini/esmini'>Environment Simulator Minimalistic (esmini)</a> is a basic OpenSCENARIO player that Open Scenario Editor and PyEsmini use internally.")
 
     def license(self):
         license = open('Licenses/LICENSE_pyesmini', 'r').read()
@@ -1369,7 +1369,7 @@ class Gui(qtw.QMainWindow):
 
     # internals
     def init_gui(self):
-        """Deze methode wordt aangeroepen door de __init__ van de mixin class
+        """This method is called by the __init__ of the mixin class 
         """
         ## self.parent = parent
         # qtw.QMainWindow.__init__(self, parent) # aparte initialisatie net als
@@ -1532,7 +1532,7 @@ class Gui(qtw.QMainWindow):
             self.quit()
 
     def ask_yesnocancel(self, prompt):
-        """stelt een vraag en retourneert het antwoord
+        """asks a question and returns the answer 
         1 = Yes, 0 = No, -1 = Cancel
         """
         retval = dict(zip((qtw.QMessageBox.Yes, qtw.QMessageBox.No,
@@ -1545,7 +1545,7 @@ class Gui(qtw.QMainWindow):
         return retval[h]
 
     def ask_for_text(self, prompt, value=''):
-        """vraagt om tekst en retourneert het antwoord"""
+        """asks for text and returns the answer """
         self.in_dialog = True
         data, *_ = qtw.QInputDialog.getText(self, self.editor.title, prompt,
                                             qtw.QLineEdit.Normal, value)
@@ -1566,8 +1566,8 @@ class Gui(qtw.QMainWindow):
         return ok, str(name)
 
     def enable_pasteitems(self, active=False):
-        """activeert of deactiveert de paste-entries in het menu
-        afhankelijk van of er iets te pasten valt
+        """activates or deactivates the paste entries in the menu
+         depending on whether there is something to fit 
         """
         if active:
             self.pastebefore_item.setText("Paste Before")

@@ -2,7 +2,7 @@
 
 # -*- coding: utf-8 -*-
 """
-XMLEdit GUI-onafhankelijke code
+XMLEdit GUI-independent code
 """
 import sys
 import os
@@ -141,12 +141,11 @@ class XMLTree():
         tree.write(fn, encoding="utf-8", xml_declaration=True)
 
 
-# class AxeMixin():
 class Editor():
-    "Applicatievenster zonder GUI-specifieke methoden"
+    "Application window without GUI specific methods"
 
     def __init__(self, fname):
-        self.title = "Albert's XML Editor"
+        self.title = "Open Scenario Editor"
         self.xmlfn = os.path.abspath(fname) if fname else ''
         self.gui = Gui(self, fname)
         self.gui.cut_att = None
@@ -166,8 +165,8 @@ class Editor():
         self.gui.go()
 
     def mark_dirty(self, state):
-        """past gewijzigd-status aan
-        en retourneert de overeenkomstig gewijzigde tekst voor de titel
+        """adjusts modified status
+         and returns the correspondingly modified text for the title 
         """
         self.tree_dirty = state
         test = ' - ' + TITEL
@@ -182,7 +181,7 @@ class Editor():
             self.gui.set_windowtitle(title)
 
     def check_tree(self):
-        """vraag of er iets moet gebeuren wanneer de data gewijzigd is
+        """ask if something should be done when the data is changed 
         """
         ok = True
         if self.tree_dirty:
@@ -434,9 +433,9 @@ class Editor():
 
     # user actions from application menu
     def newxml(self, event=None):
-        """nieuwe xml boom initialiseren
+        """initialize new xml tree
 
-        de underscore methode moet in de gui module zijn gedefinieerd
+         the underscore method must be defined in the gui module 
         """
         if self.check_tree():
             h = self.gui.ask_for_text(
