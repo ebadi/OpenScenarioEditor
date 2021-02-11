@@ -845,6 +845,15 @@ class Gui(qtw.QMainWindow):
 
         self.mainUi.pushButton_osgview.clicked.connect(self.osg)
 
+
+        self.mainUi.pushButton_addpath.clicked.connect(self.addPath)
+        self.mainUi.pushButton_clearpath.clicked.connect(self.clearPaths)
+
+
+        self.mainUi.pushButton_logfile.clicked.connect(self.saveRecordingDialog)
+        # self.mainUi.pushButton_clearlog.clicked.connect(self.clearLog)
+
+
         self.mainUi.show()
 
     def my_set_search(self, ele, attr_name, attr_val, text):
@@ -872,6 +881,11 @@ class Gui(qtw.QMainWindow):
         record = self.mainUi.checkBox_record.isChecked()
         threads = self.mainUi.checkBox_threads.isChecked()
         use_viewer = self.mainUi.checkBox_use_viewer.isChecked()
+        x = float(self.mainUi.lineEdit_window_x.text())
+        y = float(self.mainUi.lineEdit_window_y.text())
+        w = float(self.mainUi.lineEdit_window_w.text())
+        h = float(self.mainUi.lineEdit_window_h.text())
+
         print(
             "disable_ctrls =",
             disable_ctrls,
@@ -887,8 +901,12 @@ class Gui(qtw.QMainWindow):
                 disable_ctrls=disable_ctrls,
                 use_viewer=use_viewer,
                 threads=threads,
-                record=record,
-                oscFile=True)
+                # record=record,
+                oscFile=True,
+                x=x,
+                y=y,
+                w=w,
+                h=h)
             print("Scenario is loaded::", self.pyesmini)
         if stepsback < 0:
             return
@@ -1141,7 +1159,7 @@ class Gui(qtw.QMainWindow):
                 self.osgFilename +
                 ". Try adding additional path before opening the scenario")
 
-        self.pyesmini.step()
+        self.pyesmini.stepDT(0.0)
         self.update_timestamps()
         self.update_obj_ui()
         self.update_road_ui()
@@ -1495,19 +1513,6 @@ class Gui(qtw.QMainWindow):
 
         if popup:
             return searchmenu
-
-        # TODO : Simple and dirtym but we have to eventually move this to
-        # get_menu_data()
-        simfile = menubar.addMenu("Simulation Outputs")
-        cp = simfile.addAction("Clear Paths")
-        cp.triggered.connect(self.clearPaths)
-        ap = simfile.addAction("Add Path")
-        ap.triggered.connect(self.addPath)
-        rf = simfile.addAction("OSI Recording File")
-        rf.triggered.connect(self.saveRecordingDialog)
-
-        rh = simfile.addAction("OSI Recording Host")
-        rh.triggered.connect(self.saveRecordingDialog)
 
         aboutmenu = menubar.addMenu("About")
         a = aboutmenu.addAction("About Open Scenario Editor")

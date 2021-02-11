@@ -10,15 +10,15 @@ git clone https://github.com/ebadi/OpenScenarioEditor ~/OpenScenarioEditor
 ```
 
 To build and run on Ubuntu (tested on 20.04), simply run the following command that automatically downloads [Environment Simulator Minimalistic (esmini)
-](https://github.com/esmini/esmini]), [PyEsmini](https://github.com/ebadi/pyesmini) and required resources/dependencies.
+](https://github.com/esmini/esmini), [PyEsmini](https://github.com/ebadi/pyesmini) and required resources/dependencies.
 ```
 cd ~/OpenScenarioEditor
 ./run.sh
 ```
 
-Take a look at our demo video by clicking on the image below:
+Take a look at our [demo video](https://youtu.be/XvoPWt66IqI) by clicking on the image below:
 
-[![Open Scenario Editor Screen shot](ui/OpenScenarioEditor.png)](https://youtu.be/XvoPWt66Iq)
+[![Open Scenario Editor Screen shot](ui/OpenScenarioEditor.png)](https://youtu.be/XvoPWt66IqI)
 
 
 #### Credits

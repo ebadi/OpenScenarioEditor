@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>959</width>
-    <height>767</height>
+    <width>953</width>
+    <height>854</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -35,12 +35,12 @@
      <rect>
       <x>10</x>
       <y>100</y>
-      <width>921</width>
-      <height>611</height>
+      <width>931</width>
+      <height>741</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <property name="usesScrollButtons">
      <bool>true</bool>
@@ -53,71 +53,266 @@
     </property>
     <widget class="QWidget" name="tab_viewer">
      <attribute name="title">
-      <string>Viewer</string>
+      <string>Simulator Settings</string>
      </attribute>
-     <widget class="QSplitter" name="splitter_2">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
-        <x>30</x>
-        <y>40</y>
-        <width>841</width>
-        <height>281</height>
+        <x>730</x>
+        <y>30</y>
+        <width>182</width>
+        <height>91</height>
        </rect>
       </property>
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_">
+         <property name="text">
+          <string>x →</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="lineEdit_window_x">
+         <property name="text">
+          <string>60</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QLabel" name="label_window_w">
+         <property name="text">
+          <string>w ↔</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <widget class="QLineEdit" name="lineEdit_window_w">
+         <property name="text">
+          <string>800</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_window_y">
+         <property name="text">
+          <string>y↓</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="lineEdit_window_y">
+         <property name="text">
+          <string>60</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QLabel" name="label_window_h">
+         <property name="text">
+          <string>h ↕</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="3">
+        <widget class="QLineEdit" name="lineEdit_window_h">
+         <property name="text">
+          <string>400</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="layoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>130</y>
+        <width>901</width>
+        <height>131</height>
+       </rect>
       </property>
-      <widget class="QCheckBox" name="checkBox_disable_ctrls">
-       <property name="text">
-        <string>Disable controls (Checked: Any controller will be disabled / Unchecked: Controllers applied according to OSC file)</string>
-       </property>
-      </widget>
-      <widget class="QCheckBox" name="checkBox_use_viewer">
-       <property name="text">
-        <string>User viewer ( DO NOT CHANGE)</string>
-       </property>
-       <property name="checked">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QCheckBox" name="checkBox_record">
-       <property name="text">
-        <string>Create recording for later playback 0=no recording</string>
-       </property>
-      </widget>
-      <widget class="QCheckBox" name="checkBox_threads">
-       <property name="text">
-        <string>Threads (Checked: viewer in a separate thread, parallel to scenario engine</string>
-       </property>
-       <property name="checked">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_oscfilename">
-       <property name="text">
-        <string>(filename.xosc)</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_odrfilename">
-       <property name="text">
-        <string>(filename.xodr)</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="pushButton_editodr">
-       <property name="text">
-        <string>Edit OpenDrive file</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_osgfilename">
-       <property name="text">
-        <string>(filename.osg)</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="pushButton_osgview">
-       <property name="text">
-        <string>Open OSGEdit</string>
-       </property>
-      </widget>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QCheckBox" name="checkBox_disable_ctrls">
+         <property name="text">
+          <string>Disable controls (Checked: Any controller will be disabled / Unchecked: Controllers applied according to OSC file)</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="checkBox_use_viewer">
+         <property name="text">
+          <string>User viewer ( DO NOT CHANGE)</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="checkBox_record">
+         <property name="text">
+          <string>Create recording for later playback 0=no recording</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="checkBox_threads">
+         <property name="text">
+          <string>Threads (Checked: viewer in a separate thread, parallel to scenario engine</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QLabel" name="label_logfile_2">
+      <property name="geometry">
+       <rect>
+        <x>750</x>
+        <y>0</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Window settings</string>
+      </property>
+     </widget>
+     <widget class="QWidget" name="layoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>270</y>
+        <width>901</width>
+        <height>191</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QLabel" name="label_oscfilename">
+         <property name="text">
+          <string>(filename.xosc)</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_odrfilename">
+         <property name="text">
+          <string>(filename.xodr)</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_osgfilename">
+         <property name="text">
+          <string>(filename.osg)</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_osgview">
+         <property name="text">
+          <string>Open OSGEdit</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="layoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>30</y>
+        <width>201</width>
+        <height>58</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="0" column="0">
+        <widget class="QPushButton" name="pushButton_addpath">
+         <property name="text">
+          <string>Add path</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QPushButton" name="pushButton_clearpath">
+         <property name="text">
+          <string>Clear path</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QPushButton" name="pushButton_logfile">
+         <property name="text">
+          <string>Add OSI log file</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QPushButton" name="pushButton_clearlog">
+         <property name="text">
+          <string>Clear path</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="layoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>30</y>
+        <width>511</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QLabel" name="label_path">
+         <property name="text">
+          <string>(empty)</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_logfile">
+         <property name="text">
+          <string>(empty)</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="layoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>100</y>
+        <width>208</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QLabel" name="label_host">
+         <property name="text">
+          <string>OSI host</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEdit_host">
+         <property name="text">
+          <string>127.0.0.1</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </widget>
     <widget class="QWidget" name="tab_obj">
@@ -399,21 +594,16 @@
        </property>
       </widget>
      </widget>
-    </widget>
-    <widget class="QWidget" name="tab_road">
-     <attribute name="title">
-      <string>Road Information</string>
-     </attribute>
-     <widget class="QWidget" name="layoutWidget">
+     <widget class="QWidget" name="layoutWidget_2">
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>20</y>
-        <width>861</width>
+        <y>400</y>
+        <width>881</width>
         <height>301</height>
        </rect>
       </property>
-      <layout class="QGridLayout" name="gridLayout_4">
+      <layout class="QGridLayout" name="gridLayout_6">
        <item row="0" column="0">
         <widget class="QLabel" name="label_global_pos_x">
          <property name="text">
@@ -562,8 +752,8 @@
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>340</y>
-        <width>861</width>
+        <y>310</y>
+        <width>711</width>
         <height>31</height>
        </rect>
       </property>
@@ -580,15 +770,10 @@
         <string>Press F3 to find the next item</string>
        </property>
       </widget>
-      <widget class="QPushButton" name="pushButton_road">
-       <property name="text">
-        <string>Update Road(?)</string>
-       </property>
-      </widget>
      </widget>
     </widget>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>290</x>
