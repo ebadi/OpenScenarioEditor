@@ -354,9 +354,10 @@ class Editor():
         """return menu structure for GUI (title, callback, keyboard shortcut(s))
         """
         return ((("&New Empty Scenario", self.newxml, 'Ctrl+N'),
-                 ("&Open Scenario", self.openxml, 'Ctrl+O'),
-                 ('&Save Scenario', self.savexml, 'Ctrl+S'),
-                 ('Save Scenario &As', self.savexmlas, 'Shift+Ctrl+S'),
+                 ("&Open OpenScenario", self.openxml, 'Ctrl+O'),
+                 ("&Open OpenDrive", self.openxml, 'Ctrl+O'),
+                 ('&Save', self.savexml, 'Ctrl+S'),
+                 ('Save &As', self.savexmlas, 'Shift+Ctrl+S'),
                  ('E&xit', self.gui.quit, 'Ctrl+Q'),),
                 (("&Expand All (sub)Levels", self.expand, 'Ctrl++'),
                  ("&Collapse All (sub)Levels", self.collapse, 'Ctrl+-'),),

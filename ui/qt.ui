@@ -317,7 +317,7 @@
     </widget>
     <widget class="QWidget" name="tab_obj">
      <attribute name="title">
-      <string>Object Editor</string>
+      <string>Object Information</string>
      </attribute>
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
