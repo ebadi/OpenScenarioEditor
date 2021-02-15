@@ -1,7 +1,7 @@
 ## Done:
 - PyEsmini: RoadManager (RM) API
-- Basic testcase for PyEsminiRM
-- Bridge between [PyEsmini and PyESminiRM](https://github.com/ebadi/esmini/commit/f8e9aa4fa9ad180dce96838acba02e0b0f629ecf)
+- Basic testcases for PyEsminiRM
+- Bridge between [PyEsmini and PyEsminiRM](https://github.com/ebadi/esmini/commit/f8e9aa4fa9ad180dce96838acba02e0b0f629ecf)
 
 ## Priority 1
 
@@ -13,8 +13,31 @@
 - Git workflow (see below)
 - OSI recording host
 - Improve fast forwarding by running the simulation in a headless mode as described in [esmini/issues/76](https://github.com/esmini/esmini/issues/76#issuecomment-775863938)
-- Identify libEsmini interfaces that are not accessible from Python (https://github.com/vedderb/rise_sdvp/blob/master/Linux/RControlStation/pagesimscen.cpp#L84)
-
+- Identify libEsmini interfaces that are not accessible from libEsmini (https://github.com/vedderb/rise_sdvp/blob/master/Linux/RControlStation/pagesimscen.cpp#L84)
+```
+    * roadmanager::Position pos
+        * pos.SetTrackPos(road->GetId(), geom->GetS(), 0)
+        * pos.SetLanePos(road->GetId(), lane->GetId(), s_start, 0, i);
+        * pos.GetX()
+        * pos.GetY()
+    * roadmanager::Road *road = mOdrManager->GetRoadByIdx(r)   ### RM_DLL_API int RM_GetIdOfRoadFromIndex(int index) #### QUESTION: Only id, not aother properties
+        * road->GetNumberOfGeometries()
+        * road->GetId()
+        * geom = road->GetGeometry(i)
+    * roadmanager::LaneSection *lane_section = road->GetLaneSectionByIdx(i)
+        * lane_section->GetS()
+        * lane_section->GetS()
+        * lane_section->GetLength() #### RM_DLL_API float RM_GetRoadLength(int id)
+        * lane_section->GetNumberOfLanes() #### RM_DLL_API int RM_GetRoadNumberOfLanes(int roadId, float s) QUESTION: filtered by "s" !!!
+    * roadmanager::Lane *lane = lane_section->GetLaneByIdx(j)   ### RM_DLL_API int RM_GetLaneIdByIndex(int roadId, int laneIndex, float s)
+        * lane->IsDriving()
+        * lane->GetId()
+    * roadmanager::Geometry *geom  
+        * geom->GetS()
+        * geom->GetLength()
+```
+    
+    
 ## Priority 2
 - RControlStation features.
 - Use python logger
@@ -36,6 +59,7 @@
 
 
 ### new branch off the develope branch
+```
 git checkout -b featureX develop 
 git add CHANGEED FILES
 git commit -m "CHANGES"
@@ -45,3 +69,4 @@ git checkout develop
 git merge featureX
 
 git push --set-upstream origin develop
+```
