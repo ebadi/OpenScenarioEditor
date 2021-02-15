@@ -52,31 +52,23 @@ def calculate_location(win, node):
         node = node.parent()
     return tuple(id_)
 
+
 class Viewer(QWidget):
 
     def __init__(self):
         super().__init__()
 
-        self.initUI()
-
-    def initUI(self):
-        self.setGeometry(300, 300, 350, 100)
-        self.setWindowTitle('Colours')
-        self.show()
-
     def paintEvent(self, e):
         qp = QPainter()
         qp.begin(self)
-        self.drawRectangles(qp)
-        qp.end()
 
-    def drawRectangles(self, qp):
         col = QColor(0, 0, 0)
         col.setNamedColor('#d4d4d4')
         qp.setPen(col)
-
         qp.setBrush(QColor(200, 0, 0))
         qp.drawRect(10, 15, 90, 60)
+
+        qp.end()
 
 
 
@@ -853,7 +845,6 @@ class Gui(qtw.QMainWindow):
         self.odrFilename = None
         self.osgFilename = None
 
-
     def my_set_search(self, ele, attr_name, attr_val, text):
         print("SEARCH:::", ele, attr_name, attr_val, text)
         self.editor.search_args = (ele, attr_name, attr_val, text)
@@ -1399,8 +1390,6 @@ class Gui(qtw.QMainWindow):
 
         self.init_menus()
 
-
-
         self.mainUi = uic.loadUi("ui/qt.ui")
         self.mainUi.pushButton_bigstepforward.clicked.connect(
             lambda x: self.step(100))
@@ -1424,10 +1413,8 @@ class Gui(qtw.QMainWindow):
 
         self.mainUi.pushButton_osgview.clicked.connect(self.osg)
 
-
         self.mainUi.pushButton_addpath.clicked.connect(self.addPath)
         self.mainUi.pushButton_clearpath.clicked.connect(self.clearPaths)
-
 
         self.mainUi.pushButton_logfile.clicked.connect(self.saveRecordingDialog)
         # self.mainUi.pushButton_clearlog.clicked.connect(self.clearLog)
@@ -1440,12 +1427,8 @@ class Gui(qtw.QMainWindow):
         self.tree.headerItem().setHidden(True)
         self.tree.setFixedWidth(250)
 
-
-
-
         layout = QHBoxLayout()
         # layout.addWidget(QPushButton("Left-Most"))
-
 
         ############################################
         # Initialize tab screen
@@ -1455,16 +1438,13 @@ class Gui(qtw.QMainWindow):
         # self.tabs.resize(300, 200)
         self.tabs.setFixedWidth(250)
         # Add tabs
-        self.tabs.addTab(self.tab1,"OpenScenario")
-        self.tabs.addTab(self.tab2,"OpenDrive")
+        self.tabs.addTab(self.tab1, "OpenScenario")
+        self.tabs.addTab(self.tab2, "OpenDrive")
         # Create first tab
         self.tab1.layout = QVBoxLayout(self)
         self.tab2.layout = QVBoxLayout(self)
 
         self.tab1.layout.addWidget(self.tree)
-
-
-
 
         self.pushButton1 = QPushButton("PyQt5 button")
         self.comboBoxScenario = QComboBox()
@@ -1480,16 +1460,11 @@ class Gui(qtw.QMainWindow):
         self.tab1.setLayout(self.tab1.layout)
         self.tab2.setLayout(self.tab2.layout)
 
-
-
-
-
         # Add tabs to widget
         layout.addWidget(self.tabs)
         layout.addWidget(self.mainUi)
 
         self.setLayout(layout)
-
 
         widget = QWidget()
         widget.setLayout(layout)

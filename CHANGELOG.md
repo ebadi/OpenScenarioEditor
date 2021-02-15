@@ -12,3 +12,4 @@
   * Basic controls for the simulator (play, resume, step for/backward and reload)
   * XML viewer and editor for editing Open Scenario files based on AXE
   * OpenScenario object and road element search functionality
+  * Responsive UI during simulation
