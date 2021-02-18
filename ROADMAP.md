@@ -6,13 +6,6 @@
 ## Priority 1
 
 - PyEsmini: Fix remaining PyEsmini/PyEsminiRM issues
-- PyEsmini: Error handling for methods that need to be called in the right order (e.g. addsensor before fetch sensor data, etc)
-- PyEsmini: Convert return ctypes structures to native python data structure
-- PyEsmini: API Documentation
-- Formatting standard PEP8 (autopep8 --in-place --aggressive file.py)
-- Git workflow (see below)
-- OSI recording host
-- Improve fast forwarding by running the simulation in a headless mode as described in [esmini/issues/76](https://github.com/esmini/esmini/issues/76#issuecomment-775863938)
 - Identify libEsmini interfaces that are not accessible from libEsmini (https://github.com/vedderb/rise_sdvp/blob/master/Linux/RControlStation/pagesimscen.cpp#L84)
 ```
     * roadmanager::Position pos
@@ -36,7 +29,18 @@
         * geom->GetS()
         * geom->GetLength()
 ```
-    
+EnvironmentSimulator/Modules/
+ 
+- RoadManager.hpp/playerbase.hpp/ScenarioEngine.hpp(?)/viewer.hpp(?) interface to python3 using pybind11?
+- Connection between these items? for example, ScenarioEngine and RoadManager 
+- PyEsmini: Error handling for methods that need to be called in the right order (e.g. addsensor before fetch sensor data, etc)
+- PyEsmini: Convert return ctypes structures to native python data structure
+- PyEsmini: API Documentation
+- Formatting standard PEP8 (autopep8 --in-place --aggressive file.py)
+- Git workflow (see below)
+- OSI recording host
+- Improve fast forwarding by running the simulation in a headless mode as described in [esmini/issues/76](https://github.com/esmini/esmini/issues/76#issuecomment-775863938)
+
     
 ## Priority 2
 - RControlStation features.
