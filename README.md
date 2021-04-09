@@ -18,7 +18,7 @@ cd ~/OpenScenarioEditor
 
 Take a look at our demo video by clicking on the image below:
 
-[![Open Scenario Editor Screen shot](ui/OpenScenarioEditor.png)](https://youtu.be/XvoPWt66Iq)
+[![Open Scenario Editor Screen shot](ui/OpenScenarioEditor.png)](https://youtu.be/XvoPWt66IqI)
 
 
 #### Credits
