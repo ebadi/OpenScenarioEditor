@@ -870,6 +870,10 @@ class Gui(qtw.QMainWindow):
     def reload(self, stepsback=-1):
         disable_ctrls = self.mainUi.checkBox_disable_ctrls.isChecked()
         record = self.mainUi.checkBox_record.isChecked()
+        if record:
+                recordFile = "record.rec"
+        else:
+                recordFile = ""
         threads = self.mainUi.checkBox_threads.isChecked()
         use_viewer = self.mainUi.checkBox_use_viewer.isChecked()
         print(
@@ -879,15 +883,15 @@ class Gui(qtw.QMainWindow):
             use_viewer,
             ", threads = ",
             threads,
-            ", record = ",
-            record)
+            ", recordFile = ",
+            recordFile)
         if self.oscFileName:
             self.pyesmini = PyEsmini(
                 self.oscFileName,
                 disable_ctrls=disable_ctrls,
                 use_viewer=use_viewer,
                 threads=threads,
-                record=record,
+                recordFile=recordFile,
                 oscFile=True)
             print("Scenario is loaded::", self.pyesmini)
         if stepsback < 0:
@@ -1496,7 +1500,7 @@ class Gui(qtw.QMainWindow):
         if popup:
             return searchmenu
 
-        # TODO : Simple and dirtym but we have to eventually move this to
+        # TODO : Simple and dirty but we have to eventually move this to
         # get_menu_data()
         simfile = menubar.addMenu("Simulation Outputs")
         cp = simfile.addAction("Clear Paths")
