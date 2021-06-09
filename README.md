@@ -10,6 +10,8 @@ ASAM OpenSCENARIO defines a file format for the description of the dynamic conte
 - [Download the prebuilt binary release package](https://github.com/ebadi/OpenScenarioEditor/releases) and unpack it.
 - Run the OpenScenarioEditor.py script:  `python  OpenScenarioEditor.py`
 
+[demo video](https://www.youtube.com/watch?v=7id7vQpcQmg)
+
 #### Building and running on Linux
 First clone the repository:
 ```
