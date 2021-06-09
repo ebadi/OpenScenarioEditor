@@ -3,7 +3,14 @@ _Open Scenario Editor_ is a simple ASAM OpenSCENARIO (*.xosc) editor based on [E
 
 ASAM OpenSCENARIO defines a file format for the description of the dynamic content of driving and traffic simulators. The primary use-case of OpenSCENARIO is to describe complex, synchronized maneuvers that involve multiple entities like vehicles, pedestrians and other traffic participants. The description of a maneuver may be based on driver actions (e.g. performing a lane change) or on trajectories (e.g. derived from a recorded driving maneuver). Other content, such as the description of the ego vehicle, driver appearance, pedestrians, traffic and environment conditions, is included in the standard as well. You can also read more about [OpenSCENARIO format on the ASAM website](https://www.asam.net/standards/detail/openscenario/).
 
-#### Build and run
+#### Running on Windows
+
+- First install Python **3** and use pip tool to install PyQt5 (`pip install pyqt5`) 
+
+- [Download the prebuilt binary release package](https://github.com/ebadi/OpenScenarioEditor/releases) and unpack it.
+- Run the OpenScenarioEditor.py script:  `python  OpenScenarioEditor.py`
+
+#### Building and running on Linux
 First clone the repository:
 ```
 git clone https://github.com/ebadi/OpenScenarioEditor ~/OpenScenarioEditor
