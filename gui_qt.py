@@ -421,28 +421,27 @@ class VisualTree(qtw.QTreeWidget):
             else:
                 ## data = str(item.text(0))
                 edit = True
-                # if data.startswith(ELSTART):
-                # if item.childCount() > 0:
+                ## if data.startswith(ELSTART):
+                ## if item.childCount() > 0:
                 ## edit = False
         if edit:
-            # self.parent.edit()
-            pass
+            self.parent.edit_item(item)
         else:
             event.ignore()
 
     def mouseReleaseEvent(self, event):
         "reimplemented to show popup menu when applicable"
+        xc, yc = event.x(), event.y()
+        item = self.itemAt(xc, yc)
         if event.button() == core.Qt.RightButton:
-            xc, yc = event.x(), event.y()
-            item = self.itemAt(xc, yc)
             if item and item != self.parent.top:
-                # self.parent.setCurrentItem(item)
+                ## self.parent.setCurrentItem(item)
                 menu = self.parent.init_menus(popup=True)
-                menu.exec_(core.QPoint(xc, yc))
-            else:
-                event.ignore()
-        else:
-            event.ignore()
+                menu.exec_(event.globalPos())
+        else:  # left click
+            self.parent.set_selected_item(item)
+
+        event.ignore()
 
 
 class UndoRedoStack(qtw.QUndoStack):
