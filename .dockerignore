@@ -1,0 +1,6 @@
+esmini/
+venv/
+__pycache__/
+*.pyc
+.git/
+log.txt

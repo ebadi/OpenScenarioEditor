@@ -17,13 +17,14 @@ import sys
 from PyQt5 import QtCore, QtGui, QtWidgets, uic
 from PyQt5.QtWidgets import QApplication, QWidget, QInputDialog, QLineEdit, QFileDialog, QMessageBox
 from PyQt5.QtGui import QIcon
-from pyesmini.pyesmini.pyesmini import *
+from esmini import EsminiLib, ELEMENT_STATES
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 # TODO : Only show path selection when the system cannot find the
 # openDrive or OSG files
 import threading
+import subprocess
 
 simulatorRunning = False
 
@@ -795,6 +796,8 @@ class CopyAttributeCommand(qtw.QUndoCommand):
 # class MainFrame(qtw.QMainWindow, AxeMixin):
 class Gui(qtw.QMainWindow):
     "Main application window"
+    # Emitted from the esmini simulation thread; Qt queues it to the GUI thread.
+    _storyboard_event = pyqtSignal(str)
     undoredowarning = """\
     NOTE:
 
@@ -844,6 +847,8 @@ class Gui(qtw.QMainWindow):
 
         self.mainUi.pushButton_osgview.clicked.connect(self.osg)
 
+        self._storyboard_event.connect(self._on_storyboard_event)
+
         self.mainUi.show()
 
     def my_set_search(self, ele, attr_name, attr_val, text):
@@ -860,11 +865,26 @@ class Gui(qtw.QMainWindow):
     def findRoad(self):
         pass
 
+    def _on_storyboard_event(self, text):
+        self.mainUi.listWidget_storyboard.addItem(text)
+        self.mainUi.listWidget_storyboard.scrollToBottom()
+
     def osg(self):
-        # 3
-        print("---------------------------------------------")
-        self.editor.about()
-        # 3
+        if not self.osgFilename or not os.path.isfile(self.osgFilename):
+            QMessageBox.information(
+                None, "Open 3D Model",
+                "No 3D model file is loaded.\nOpen a scenario first.")
+            return
+        osgviewer = os.path.join(
+            os.path.dirname(os.path.realpath(__file__)), "esmini", "osgviewer")
+        viewer = osgviewer if os.path.isfile(osgviewer) else "osgviewer"
+        try:
+            subprocess.Popen([viewer, self.osgFilename])
+        except FileNotFoundError:
+            QMessageBox.information(
+                None, "Open 3D Model",
+                "3D model file:\n" + self.osgFilename +
+                "\n\nOpen this file with an OSG-compatible viewer (e.g. osgviewer).")
 
     def reload(self, stepsback=-1):
         disable_ctrls = self.mainUi.checkBox_disable_ctrls.isChecked()
@@ -885,13 +905,18 @@ class Gui(qtw.QMainWindow):
             ", recordFile = ",
             recordFile)
         if self.oscFileName:
-            self.pyesmini = PyEsmini(
+            self.mainUi.listWidget_storyboard.clear()
+            self.pyesmini = EsminiLib(
                 self.oscFileName,
                 disable_ctrls=disable_ctrls,
                 use_viewer=use_viewer,
                 threads=threads,
-                recordFile=recordFile,
-                oscFile=True)
+                recordFile=recordFile)
+            self.pyesmini.registerStoryboardCallback(
+                lambda name, t, s, path:
+                    self._storyboard_event.emit(
+                        f"[{ELEMENT_STATES.get(s, s)}]  {name}  —  {path}")
+            )
             print("Scenario is loaded::", self.pyesmini)
         if stepsback < 0:
             return
@@ -958,24 +983,8 @@ class Gui(qtw.QMainWindow):
         length = float(self.mainUi.lineEdit_length.text())
         height = float(self.mainUi.lineEdit_height.text())
 
-        self.pyesmini.reportObjectPos(
-            id=self.currentObjIndx,
-            timestamp=0,
-            x=x,
-            y=y,
-            z=z,
-            h=h,
-            p=p,
-            r=r,
-            speed=speed)
-        self.pyesmini.reportObjectRoadPos(
-            id=self.currentObjIndx,
-            timestamp=0,
-            roadId=roadid,
-            laneId=laneid,
-            laneOffset=laneoffset,
-            s=s,
-            speed=speed)
+        self.pyesmini.reportObjectPos(self.currentObjIndx, x, y, z, h, p, r)
+        self.pyesmini.reportObjectRoadPos(self.currentObjIndx, roadid, laneid, laneoffset, s)
         # adding line below breaks the changes
         # self.pyesmini.reportObjectLateralPosition(id = self.currentObjIndx,
         # t= t))
@@ -988,10 +997,10 @@ class Gui(qtw.QMainWindow):
         QMessageBox.information(
             None,
             "Information",
-            "<a href='https://github.com/esmini/esmini'>Environment Simulator Minimalistic (esmini)</a> is a basic OpenSCENARIO player that Open Scenario Editor and PyEsmini use internally.")
+            "<a href='https://github.com/esmini/esmini'>Environment Simulator Minimalistic (esmini)</a> is a basic OpenSCENARIO player used internally by Open Scenario Editor.")
 
     def license(self):
-        license = open('Licenses/LICENSE_pyesmini', 'r').read()
+        license = open('Licenses/LICENSE_esmini', 'r').read()
         ScrollMessageBox(QMessageBox.Information, "Linceses", str(license))
 
     def update_timestamps(self):
@@ -1056,6 +1065,8 @@ class Gui(qtw.QMainWindow):
 
     def update_road_ui(self):
         roadState = self.pyesmini.getRoadInfoAtDistance(0, 10, 0)
+        if roadState is None:
+            return
         self.mainUi.lineEdit_global_pos_x.setText(
             "{:.4f}".format(getattr(roadState, "global_pos_x")))
         self.mainUi.lineEdit_global_pos_y.setText(
@@ -1121,28 +1132,25 @@ class Gui(qtw.QMainWindow):
         print("osc filename: ", self.oscFileName)
         self.reload()
         self.mainUi.label_oscfilename.setText(self.oscFileName)
-        self.odrFilename = os.path.join(
-            os.path.dirname(
-                self.oscFileName),
-            self.pyesmini.getODRFilename())
+
+        osc_dir = os.path.dirname(self.oscFileName)
+
+        odr = self.pyesmini.getODRFilename()
+        self.odrFilename = os.path.normpath(os.path.join(osc_dir, odr)) if odr else ""
         print("odr filename: ", self.odrFilename)
         self.mainUi.label_odrfilename.setText(self.odrFilename)
-        self.osgFilename = os.path.join(
-            os.path.dirname(
-                self.oscFileName),
-            self.pyesmini.getSceneGraphFilename())
+
+        osg = self.pyesmini.getSceneGraphFilename()
+        self.osgFilename = os.path.normpath(os.path.join(osc_dir, osg)) if osg else ""
         print("osg filename: ", self.osgFilename)
         self.mainUi.label_osgfilename.setText(self.osgFilename)
-        # Warning
-        try:
-            open(self.osgFilename, 'r')
-        except BaseException:
+
+        if self.osgFilename and not os.path.isfile(self.osgFilename):
             QMessageBox.warning(
                 None,
                 "Warning",
-                "Error Opening 3D Model file: " +
-                self.osgFilename +
-                ". Try adding additional path before opening the scenario")
+                "3D model file not found: " + self.osgFilename +
+                "\nTry adding the directory containing the model via 'Add Path'.")
 
         self.pyesmini.step()
         self.update_timestamps()
@@ -1556,8 +1564,11 @@ class Gui(qtw.QMainWindow):
 
     def file_to_read(self):
         """ask for file to load"""
+        xosc_dir = os.path.join(
+            os.path.dirname(os.path.realpath(__file__)), "esmini", "resources", "xosc")
+        start_dir = xosc_dir if os.path.isdir(xosc_dir) else os.getcwd()
         fnaam, *_ = qtw.QFileDialog.getOpenFileName(self, "Choose a file",
-                                                    os.getcwd(), HMASK)
+                                                    start_dir, HMASK)
         ok = bool(fnaam)
         return ok, str(fnaam)
 

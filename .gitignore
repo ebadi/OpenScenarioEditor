@@ -50,3 +50,13 @@ compile_commands.json
 
 # QtCreator local machine specific files for imported projects
 *creator.user*
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Logs
+*.log
+log.txt
+

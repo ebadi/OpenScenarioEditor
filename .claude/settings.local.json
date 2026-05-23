@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -m pip --version)",
+      "Bash(git --version)",
+      "Bash(sudo apt-get *)",
+      "Bash(dpkg *)",
+      "Bash(sudo -S *)",
+      "Bash(python3 -m ensurepip --user)",
+      "Read(//home/researcher/.local/bin/**)",
+      "Read(//usr/bin/**)",
+      "Read(//usr/**)",
+      "Bash(curl -sS https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py)",
+      "Bash(python3 /tmp/get-pip.py --user)",
+      "Bash(python3 -m venv /tmp/test_venv)",
+      "Bash(python3 -m venv --without-pip /home/researcher/venv)",
+      "Read(//home/researcher/venv/**)",
+      "Bash(git clone *)",
+      "Bash(awk '{print $2, $1}')",
+      "Bash(chmod +x *)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebSearch",
+      "Bash(gh api *)",
+      "Bash(gh auth *)",
+      "Bash(git *)",
+      "WebFetch(domain:esmini.github.io)",
+      "Bash(curl -s \"https://raw.githubusercontent.com/esmini/esmini/master/scripts/esmini.py\")",
+      "Bash(curl -s \"https://api.github.com/repos/esmini/esmini/contents/EnvironmentSimulator/Libraries\")",
+      "Bash(python3 -c \"import sys,json; [print\\(x['name']\\) for x in json.load\\(sys.stdin\\) if isinstance\\(x,dict\\)]\")",
+      "Bash(curl -s \"https://api.github.com/repos/esmini/esmini/contents/\")",
+      "Bash(curl -s \"https://api.github.com/repos/esmini/esmini/contents/scripts\")",
+      "Bash(curl -s \"https://api.github.com/repos/esmini/esmini/contents/Hello-World_coding-example\")",
+      "Bash(curl *)"
+    ]
+  }
+}

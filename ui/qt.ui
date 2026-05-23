@@ -587,6 +587,21 @@
       </widget>
      </widget>
     </widget>
+    <widget class="QWidget" name="tab_storyboard">
+     <attribute name="title">
+      <string>Storyboard States</string>
+     </attribute>
+     <widget class="QListWidget" name="listWidget_storyboard">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>881</width>
+        <height>361</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
    </widget>
    <widget class="QWidget" name="">
     <property name="geometry">

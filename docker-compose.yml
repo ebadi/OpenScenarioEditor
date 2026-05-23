@@ -1,0 +1,8 @@
+services:
+  openscenarioeditor:
+    build: .
+    environment:
+      - DISPLAY          # forwards host DISPLAY (e.g. :0) into the container
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix   # X11 socket
+      - /dev/shm:/dev/shm               # shared memory required by Qt

@@ -1,29 +1,23 @@
-### Open Scenario Editor
+⚠️ NOTICE: Project No Longer Maintained
+
+This project is no longer actively maintained or supported. I have shifted my focus to a new project. Please check out [OpenScenarioDrive](https://github.com/ebadi/OpenScenarioDrive) for the latest work and updates.
+
+### Open Scenario Editor 2.0
 _Open Scenario Editor_ is a simple ASAM OpenSCENARIO (*.xosc) editor based on [Environment Simulator Minimalistic (esmini)](https://github.com/esmini/esmini).
 
 ASAM OpenSCENARIO defines a file format for the description of the dynamic content of driving and traffic simulators. The primary use-case of OpenSCENARIO is to describe complex, synchronized maneuvers that involve multiple entities like vehicles, pedestrians and other traffic participants. The description of a maneuver may be based on driver actions (e.g. performing a lane change) or on trajectories (e.g. derived from a recorded driving maneuver). Other content, such as the description of the ego vehicle, driver appearance, pedestrians, traffic and environment conditions, is included in the standard as well. You can also read more about [OpenSCENARIO format on the ASAM website](https://www.asam.net/standards/detail/openscenario/).
 
-#### Running on Windows
-
-- First install Python **3** and use pip tool to install PyQt5 (`pip install pyqt5`) 
-
-- [Download the prebuilt binary release package](https://github.com/ebadi/OpenScenarioEditor/releases) and unpack it.
-- Run the OpenScenarioEditor.py script:  `python  OpenScenarioEditor.py`
-
-[demo video](https://www.youtube.com/watch?v=7id7vQpcQmg)
-
-#### Building and running on Linux
+#### Building using docker
 First clone the repository:
 ```
-git clone https://github.com/ebadi/OpenScenarioEditor ~/OpenScenarioEditor
+git clone https://github.com/ebadi/OpenScenarioEditor 
+cd OpenScenarioEditor
+xhost +local:docker
+docker compose up --build
 ```
 
-To build and run on Ubuntu (tested on 20.04), simply run the following command that automatically downloads [Environment Simulator Minimalistic (esmini)
-](https://github.com/esmini/esmini]), [PyEsmini](https://github.com/ebadi/pyesmini) and required resources/dependencies.
-```
-cd ~/OpenScenarioEditor
-./run.sh
-```
+The first build downloads and compiles [esmini](https://github.com/esmini/esmini) (~10 min). Subsequent starts use the cached image and launch instantly.
+
 
 Take a look at our demo video by clicking on the image below:
 
